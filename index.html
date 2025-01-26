@@ -14,6 +14,10 @@ body {
     font-size: 14px;
     font-family: Arial;
 }
+a {
+    color: #000;
+    cursor: context-menu;
+}
 dialog {
     position: relative;
 }
@@ -141,7 +145,7 @@ user-select: none;
   width: max-content;
   padding: 5px;
   padding-left: 0;
-  box-shadow: 0px 6px 12px -3px #25292e0a, 0px 6px 18px 0px #25292e1f;
+  box-shadow: 0px 3px 6px 0px #25292e1f;
   border: solid 1px #d1d9e0;
 }
 .overlay {
@@ -198,8 +202,46 @@ user-select: none;
     overflow: hidden;
   }
 }
+
+.col {
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+.on {
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0093ff;
+}
+.on span {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    padding: 11px;
+    background: white;
+    border-radius: 25px;
+}
+.on span::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    background: #0093ff;
+    height: 4px;
+    right: 0;
+}
 </style>
 </head>
+<a href=""><div class="toolbar col"><div class="on"><span></span></div><span style="margin-left: 10px;">The Painter</span></div></a>
 <div title="Ctrl + B" class="open-errr toolbar" id="showBtn"><button class="click-button-div"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M430.11 347.9c-6.6-6.1-16.3-7.6-24.6-9-11.5-1.9-15.9-4-22.6-10-14.3-12.7-14.3-31.1 0-43.8l30.3-26.9c46.4-41 46.4-108.2 0-149.2-34.2-30.1-80.1-45-127.8-45-55.7 0-113.9 20.3-158.8 60.1-83.5 73.8-83.5 194.7 0 268.5 41.5 36.7 97.5 55 152.9 55.4h1.7c55.4 0 110-17.9 148.8-52.4 14.4-12.7 11.99-36.6.1-47.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><circle cx="144" cy="208" r="32"/><circle cx="152" cy="311" r="32"/><circle cx="224" cy="144" r="32"/><circle cx="256" cy="367" r="48"/><circle cx="328" cy="144" r="32"/></svg></button></div>
 <body>
   <script src="https://cdn.jsdelivr.net/npm/interactjs@2.0.0/dist/interact.min.js"></script>
