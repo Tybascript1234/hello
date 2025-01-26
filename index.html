@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <style>
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    font-size: 14px;
+    font-family: Arial;
+}
+dialog {
+    position: relative;
+}
+.open-errr {
+user-select: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 16px;
+}
+.open-errr button {
+  width: 40px;
+  height: 40px;
+}
+.ommenrtyy-rter {
+  top: 0;
+    z-index: 100000000000000000;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+    margin: auto;
+    display: none;
+    margin-top: 20px;
+    justify-content: center;
+}
+.ommenrtyy-rter vole {
+    transition: ease 0.3s;
+    position: absolute;
+    top: 3px;
+    display: block;
+    padding: 2px 27px;
+    border-radius: 5px;
+    background-color: #535d6993;
+}
+.ommenrtyy-rter vole:hover {
+    background-color: #535d69c7;
+}
+.onar {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border-radius: 8px;
+    box-shadow: 0px 3px 7px #0000004d;
+    margin: 16px;
+    background-color: #fff;
+}
+.hello-reload {
+    width: -webkit-fill-available;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.hello-reload div {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    width: max-content;
+}
+.hello-reload div button {
+    transition: ease 0.2s;
+    padding: 13px;
+    margin: 1px 1px;
+    margin-right: 10px;
+    border-radius: 24px;
+    border: none;
+    outline: solid 1px #cccccc00;
+}
+.ionicon {
+    height: 22px;
+    width: 22px;
+    opacity: .6;
+}
+.zoomenda {
+    display: flex;
+}
+.click-button-div {
+    outline-color: #0f6cf8;
+    outline-width: 3px;
+    background: #0000;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    margin-left: 5px;
+    font-size: 15px;
+    color: #252525;
+}
+.click-button-div:hover {
+    background: #606a700a;
+}
+.click-button-div:active {
+    background: #606a7017;
+}
+.click-button-div:hover .ionicon {
+  transition: ease 0.3s;
+    opacity: .8;
+}
+.click-button-div:active .ionicon {
+  transition: ease 0.0s;
+    opacity: .8;
+    transform: scale(0.95);
+}
+.outline {
+    opacity: .0;
+    transition: ease 0.2s;
+    position: absolute;
+    overflow: hidden;
+    height: 0px;
+    width: 0px;
+    display: flex;
+    bottom: 27px;
+    background: white;
+    box-shadow: 0px 0px 0px -0px #25292e0a, 0px 0px 0px 0px #25292e1f;
+    border: solid 1px #d1d9e0;
+    border-radius: 8px;
+    padding: 0;
+    z-index: 40;
+    align-items: center;
+}
+.menu.active {
+  opacity: 1;
+  height: max-content;
+  width: max-content;
+  padding: 5px;
+  padding-left: 0;
+  box-shadow: 0px 6px 12px -3px #25292e0a, 0px 6px 18px 0px #25292e1f;
+  border: solid 1px #d1d9e0;
+}
+.overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 0%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 50;
+}
+.only {
+  display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  .only {
+    display: flex;
+  }
+  .kom {
+  display: none;
+  }
+  .menu.active {
+    box-shadow: none;
+    width: -webkit-fill-available;
+    left: 0;
+    height: -webkit-fill-available;
+    bottom: 0;
+    border-radius: 0;
+    border: none;
+    justify-content: center;
+  }
+  .onar {
+    width: -webkit-fill-available;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+    justify-content: center;
+    border-radius: 16px 16px 0px 0px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .ommenrtyy-rter {
+    width: 100%;
+    bottom: 0;
+    top: auto;
+  }
+  .outline {
+    border: none;
+  }
+}
+</style>
+</head>
+<div title="Ctrl + B" class="open-errr toolbar" id="showBtn"><button class="click-button-div"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M430.11 347.9c-6.6-6.1-16.3-7.6-24.6-9-11.5-1.9-15.9-4-22.6-10-14.3-12.7-14.3-31.1 0-43.8l30.3-26.9c46.4-41 46.4-108.2 0-149.2-34.2-30.1-80.1-45-127.8-45-55.7 0-113.9 20.3-158.8 60.1-83.5 73.8-83.5 194.7 0 268.5 41.5 36.7 97.5 55 152.9 55.4h1.7c55.4 0 110-17.9 148.8-52.4 14.4-12.7 11.99-36.6.1-47.7z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><circle cx="144" cy="208" r="32"/><circle cx="152" cy="311" r="32"/><circle cx="224" cy="144" r="32"/><circle cx="256" cy="367" r="48"/><circle cx="328" cy="144" r="32"/></svg></button></div>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/interactjs@2.0.0/dist/interact.min.js"></script>
+
+  <div id="overlay" class="overlay" style="display: none;"></div>
+    <div class="ommenrtyy-rter toolbar box" id="box">
+        <vole></vole>
+        <div class="onar">
+            <div class="toolbar">
+                <button onclick="toggleMenu()" class="click-button-div" style="margin-left: 0;margin-right: 5px;"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><circle cx="256" cy="256" r="48"/><circle cx="256" cy="416" r="48"/><circle cx="256" cy="96" r="48"/></svg></button>
+                <div class="outline menu toolbar" id="menu">
+                    <button class="click-button-div only" onclick="toggleMenu()"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M328 112L184 256l144 144"/></svg></button>
+                    <button onclick="clearDrawing()" class="click-button-div"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M400 148l-21.12-24.57A191.43 191.43 0 00240 64C134 64 48 150 48 256s86 192 192 192a192.09 192.09 0 00181.07-128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"/><path d="M464 97.42V208a16 16 0 01-16 16H337.42c-14.26 0-21.4-17.23-11.32-27.31L436.69 86.1C446.77 76 464 83.16 464 97.42z"/></svg></button>
+                    <button class="click-button-div" id="downloadBtn"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M416 128L192 384l-96-96"/></svg></button>
+                    <select class="click-button-div" onchange="setLineWidth(this.value)">
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+                        <option value="12">12</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="20">20</option>
+                    </select>
+                    <button class="click-button-div only" onmousedown="startUndo()" onmouseup="stopUndo()" ontouchstart="startUndo()" ontouchend="stopUndo()"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/></svg></button>
+                    <button class="click-button-div only" onmousedown="startRedo()" onmouseup="stopRedo()" ontouchstart="startRedo()" ontouchend="stopRedo()"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M268 112l144 144-144 144M392 256H100"/></svg></button>
+                </div>
+            </div>
+            <div class="hello-reload">
+                <div>
+                    <button onclick="setColor('#000', this)" style="background: #000;"></button>
+                    <button onclick="setColor('#f12020', this)" style="background: #f12020;"></button>
+                    <button onclick="setColor('#0faef8', this)" style="background: #0faef8;"></button>
+                    <button onclick="setColor('#11fd87', this)" style="background: #11fd87;"></button>
+                    <button onclick="setColor('#b642fa', this)" style="background: #b642fa;"></button>
+                    <button onclick="setColor('#11f3f3', this)" style="background: #11f3f3;"></button>
+                </div>
+            </div>
+            <div class="zoomenda">
+                <button class="click-button-div kom" onmousedown="startUndo()" onmouseup="stopUndo()" ontouchstart="startUndo()" ontouchend="stopUndo()"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/></svg></button>
+                <button class="click-button-div kom" onmousedown="startRedo()" onmouseup="stopRedo()" ontouchstart="startRedo()" ontouchend="stopRedo()"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M268 112l144 144-144 144M392 256H100"/></svg></button>
+                <button class="click-button-div" title="Esc" onclick="clearDrawing()" id="closeBtn"><svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M289.94 256l95-95A24 24 0 00351 127l-95 95-95-95a24 24 0 00-34 34l95 95-95 95a24 24 0 1034 34l95-95 95 95a24 24 0 0034-34z"/></svg></button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+const menu = document.getElementById("menu");
+
+// تعريف دالة toggleMenu لتبديل حالة القائمة
+function toggleMenu() {
+  menu.classList.toggle("active");
+}
+
+// إظهار القائمة عند الضغط على أي من الأزرار
+const menuButtons = document.querySelectorAll("[onclick='toggleMenu()']");
+menuButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    e.stopPropagation(); // منع انتقال الحدث
+  });
+});
+
+// إخفاء القائمة عند الضغط خارجها
+document.addEventListener("click", () => {
+  menu.classList.remove("active");
+});
+
+// منع القائمة من الاختفاء عند الضغط داخلها
+menu.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+
+    </script>
+
+
+
+
+<script>
+  const showBtn = document.getElementById('showBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const box = document.getElementById('box');
+    const overlay = document.getElementById('overlay');
+
+    // عرض أو إخفاء الديف بناءً على حالته الحالية
+    const toggleBox = () => {
+      if (box.style.display === 'none' || box.style.display === '') {
+        box.style.display = 'flex';
+        overlay.style.display = 'flex';
+        showBtn.style.display = 'none';
+      } else {
+        box.style.display = 'none';
+        overlay.style.display = 'none';
+        showBtn.style.display = 'flex';
+      }
+    };
+
+    const closeBox = () => {
+      box.style.display = 'none';
+      overlay.style.display = 'none';
+      showBtn.style.display = 'flex';
+    };
+
+    showBtn.addEventListener('click', toggleBox);
+    closeBtn.addEventListener('click', closeBox);
+    overlay.addEventListener('click', closeBox);
+
+    // التعامل مع أحداث لوحة المفاتيح
+    document.addEventListener('keydown', (event) => {
+      // عرض أو إخفاء الديف عند الضغط على Ctrl + B
+      if (event.ctrlKey && event.key.toLowerCase() === 'b') {
+        toggleBox();
+      }
+      // إغلاق الديف عند الضغط على Escape
+      if (event.key === 'Escape') {
+        closeBox();
+      }
+    });
+</script>
+
+
+
+
+<script>
+          let currentColor = 'black'; // اللون الحالي
+        let isDrawing = false; // حالة الرسم
+        let currentLineWidth = 6; // سماكة الخط الافتراضية
+        let history = []; // لتخزين العناصر المرسومة
+        let redoStack = []; // لتخزين العناصر المحذوفة
+        let lastX = null; // موقع آخر نقطة رسم
+        let lastY = null; // موقع آخر نقطة رسم
+
+        // تغيير اللون الحالي
+        function setColor(color, button) {
+            currentColor = color;
+            resetButtonStyles(); // إعادة تعيين الأنماط
+            button.style.transform = 'scale(0.90)'; // إضافة التأثير عند الضغط على الزر
+            button.style.opacity = '0.7';
+        }
+
+        // تغيير سماكة الخط
+        function setLineWidth(width) {
+            currentLineWidth = parseInt(width, 10);
+        }
+
+        // التحقق إذا كان العنصر محظورًا للرسم
+        function isElementExcluded(target) {
+            return target.closest('.toolbar') !== null;
+        }
+
+        // بدء الرسم عند الضغط أو اللمس
+        function startDrawing(x, y, target) {
+            if (isElementExcluded(target)) return; // إذا كان العنصر محظورًا، لا تبدأ الرسم
+            isDrawing = true;
+            redoStack = [];
+            lastX = x;
+            lastY = y;
+            createDot(x, y, target); // رسم أول نقطة
+        }
+
+        // الرسم أثناء التحرك بالماوس أو اللمس
+        function draw(x, y, target) {
+            if (isDrawing) {
+                if (!isElementExcluded(target)) {
+                    drawSmoothLine(lastX, lastY, x, y);
+                    lastX = x;
+                    lastY = y;
+                } else {
+                    stopDrawing(); // توقف الرسم إذا تم المرور على عنصر محظور
+                }
+            }
+        }
+
+        // خوارزمية رسم الخطوط بسلاسة بين النقاط
+        function drawSmoothLine(x1, y1, x2, y2) {
+            const steps = Math.max(Math.abs(x2 - x1), Math.abs(y2 - y1));
+            for (let i = 0; i <= steps; i++) {
+                const x = x1 + (x2 - x1) * (i / steps);
+                const y = y1 + (y2 - y1) * (i / steps);
+                createDot(x, y);
+            }
+        }
+
+        // التوقف عن الرسم عند رفع الماوس أو انتهاء اللمس
+        function stopDrawing() {
+            isDrawing = false;
+            lastX = null;
+            lastY = null;
+        }
+
+        // إنشاء نقطة في الموقع المحدد
+        function createDot(x, y) {
+            const dot = document.createElement('div');
+            dot.style.position = 'fixed';
+            dot.style.backgroundColor = currentColor;
+            dot.style.width = `${currentLineWidth}px`;
+            dot.style.height = `${currentLineWidth}px`;
+            dot.style.borderRadius = '50%';
+            dot.style.left = `${x - currentLineWidth / 2}px`;
+            dot.style.top = `${y - currentLineWidth / 2}px`;
+            document.body.appendChild(dot);
+            history.push(dot);
+        }
+
+        // التراجع عن آخر 5 نقاط
+        function undo() {
+            const count = 10;
+            for (let i = 0; i < count; i++) {
+                if (history.length > 0) {
+                    const lastElement = history.pop();
+                    redoStack.push(lastElement);
+                    lastElement.remove();
+                } else {
+                    break; // إذا لم تبق نقاط في history
+                }
+            }
+        }
+
+        // إعادة آخر 5 نقاط
+        function redo() {
+            const count = 10;
+            for (let i = 0; i < count; i++) {
+                if (redoStack.length > 0) {
+                    const element = redoStack.pop();
+                    document.body.appendChild(element);
+                    history.push(element);
+                } else {
+                    break; // إذا لم تبق نقاط في redoStack
+                }
+            }
+        }
+
+        // مسح جميع العناصر المرسومة
+        function clearDrawing() {
+            history.forEach((element) => element.remove());
+            history = [];
+            redoStack = [];
+        }
+
+        // إضافة الأحداث اللازمة للماوس
+        document.body.addEventListener('mousedown', (e) => startDrawing(e.pageX, e.pageY, e.target));
+        document.body.addEventListener('mousemove', (e) => draw(e.pageX, e.pageY, e.target));
+        document.body.addEventListener('mouseup', stopDrawing);
+
+        // إضافة الأحداث اللازمة للمس
+        document.body.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            startDrawing(touch.pageX, touch.pageY, e.target);
+        });
+
+        document.body.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            draw(touch.pageX, touch.pageY, e.target);
+        });
+
+        document.body.addEventListener('touchend', stopDrawing);
+
+        // إعادة تعيين التأثيرات لجميع الأزرار
+        function resetButtonStyles() {
+            const buttons = document.querySelectorAll('.toolbar button');
+            buttons.forEach(button => {
+                button.style.transform = 'scale(1)'; // إزالة تأثير التحجيم
+                button.style.opacity = '1';
+            });
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', function () {
+            // التحقق إذا كان قد تم الرسم
+            if (history.length === 0) {
+                alert('يجب أن تقوم بالرسم أولاً قبل تنزيل الصورة!'); // عرض رسالة تنبيه
+                return; // منع متابعة الكود
+            }
+
+            // إخفاء شريط الأدوات وdiv #box مؤقتًا
+            const toolbar = document.querySelector('.toolbar');
+            const box = document.getElementById('box');
+
+            if (toolbar) {
+                toolbar.style.display = 'none';
+            }
+            if (box) {
+                box.style.display = 'none';
+            }
+
+            // استخدام html2canvas لتحويل الصفحة إلى صورة
+            html2canvas(document.body, {
+                onrendered: function (canvas) {
+                    // رسم كل النقاط المرسومة على الـcanvas
+                    history.forEach(dot => {
+                        const ctx = canvas.getContext('2d');
+                        ctx.beginPath();
+                        ctx.arc(
+                            parseFloat(dot.style.left) + currentLineWidth / 2,
+                            parseFloat(dot.style.top) + currentLineWidth / 2,
+                            currentLineWidth / 2,
+                            0,
+                            2 * Math.PI
+                        );
+                        ctx.fillStyle = dot.style.backgroundColor;
+                        ctx.fill();
+                    });
+
+                    // تحويل الـcanvas إلى صورة بصيغة PNG
+                    const image = canvas.toDataURL('image/png');
+
+                    // إنشاء رابط لتحميل الصورة
+                    const link = document.createElement('a');
+                    link.href = image;
+                    link.download = 'screenshot.png'; // اسم الصورة
+                    link.click();
+
+                    // إعادة إظهار شريط الأدوات وdiv #box بعد تحميل الصورة
+                    if (toolbar) {
+                        toolbar.style.display = 'flex';
+                    }
+                    if (box) {
+                        box.style.display = 'flex';
+                    }
+                }
+            });
+        });
+
+        // دالة بدء التراجع عند النقر المستمر
+        let undoInterval;
+        function startUndo() {
+            undoInterval = setInterval(function () {
+                undo();
+            }, 50); // تكرار التراجع كل 50 مللي ثانية
+        }
+
+        // إيقاف التراجع عند رفع الإصبع أو الماوس
+        function stopUndo() {
+            clearInterval(undoInterval);
+        }
+
+        // دالة بدء الإعادة عند النقر المستمر
+        let redoInterval;
+        function startRedo() {
+            redoInterval = setInterval(function () {
+                redo();
+            }, 50); // تكرار الإعادة كل 50 مللي ثانية
+        }
+
+        // إيقاف الإعادة عند رفع الإصبع أو الماوس
+        function stopRedo() {
+            clearInterval(redoInterval);
+        }
+  </script>
+</body>
+</html>
